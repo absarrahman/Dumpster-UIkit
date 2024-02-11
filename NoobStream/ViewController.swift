@@ -8,6 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController, MainStoryboarded {
+    
+    weak var mainCoordinator: MainCoordinator?
 
     @IBOutlet weak var hamburgerMenuButton: UIButton!
     
@@ -33,10 +35,17 @@ class ViewController: UIViewController, MainStoryboarded {
         
         profileButton.layer.cornerRadius = profileButton.frame.height * 0.25
         
+        profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+        
         tableView.dataSource = self
         tableView.delegate = self
         
         tableView.register(UINib(nibName: NoobTableViewCellOne.identifier, bundle: nil), forCellReuseIdentifier: NoobTableViewCellOne.identifier)
+    }
+    
+    @objc func profileButtonTapped() {
+        print("BUTTON TAPPED")
+        mainCoordinator?.goToProfile()
     }
 
 
